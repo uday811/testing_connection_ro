@@ -1,0 +1,29 @@
+rules:
+- action:
+    parameters:
+      code: 1
+      label: high
+    type: set_priority
+  condition: high_priority_combined == 1
+  name: High - ISO + large residual
+- action:
+    parameters:
+      code: 2
+      label: medium
+    type: set_priority
+  condition: anomaly_flag_iso == 1 and high_priority_combined == 0
+  name: Medium - ISO only
+- action:
+    parameters:
+      code: 2
+      label: medium
+    type: set_priority
+  condition: anomaly_flag_thr == 1 and anomaly_flag_iso == 0
+  name: Medium - threshold only
+- action:
+    parameters:
+      code: 3
+      label: low
+    type: set_priority
+  condition: 'true'
+  name: Low - normal
